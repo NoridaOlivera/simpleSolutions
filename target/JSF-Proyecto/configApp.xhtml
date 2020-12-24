@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"></link>
+
+
+<h:head>
+	<title>QA TEST - CYCLE config</title>
+</h:head>
+<h:body>
+<h1>QA Testing - Cycle create Control</h1>
+
+	<br />
+	<br />
+	<div class="container">
+	<label>App Name</label>
+	<h1>#{ApplicationBean.getNameApp()}</h1>
+	<label>Version</label>
+	<h2>#{ApplicationBean.VERSION_SELECTED}</h2>
+	
+	<h2>Add a new cycle</h2>
+	 <h:form class="form-group">
+     
+         <div class="form-group">
+         <label for="name">Cycle name</label>
+         <h:inputText id="name" value="#{CycleBean.name}" placeholder="Name" class="form-control"></h:inputText>
+		 </div>
+       <h:commandButton action="#{ApplicationBean.AddNewCycle(CycleBean.name)}" value="Add Cycle" class="btn btn-primary"></h:commandButton>
+       <hr />
+       <h:commandButton action="#{ApplicationBean.returnIndex()}" value="Return" class="btn btn-primary"></h:commandButton>
+   </h:form>
+   	   
+	</div>
+	 <h:dataTable value="#{ApplicationBean.CYCLES_SELECTED}" var="cycle" class="table">
+      <h:column>
+         <f:facet name="header">
+            <h:outputText value="Id"></h:outputText>
+         </f:facet>
+         <h:outputText value="#{cycle.id_app}"></h:outputText>
+      </h:column>
+      <h:column>
+         <f:facet name="header">
+            <h:outputText value="name"></h:outputText>
+         </f:facet>
+         <h:outputText value="#{cycle.name}"></h:outputText>
+      </h:column>
+      
+      <h:column>
+         <h:form>
+            <h:commandButton action="#{ApplicationBean.DeleteApp(data.id)}"
+               value="Delete" class="btn btn-danger"></h:commandButton>
+         </h:form>
+      </h:column>
+      <h:column>
+         <h:form>
+            <h:commandButton action="#{ApplicationBean.redirectCycle(data.id)}"
+               value="Add Metric"></h:commandButton>
+         </h:form>
+      </h:column>
+      
+   </h:dataTable>
+   
+	
+</h:body>
+</html>

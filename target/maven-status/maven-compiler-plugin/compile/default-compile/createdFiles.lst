@@ -1,0 +1,5 @@
+com\norida\app\model\ApplicationTested.class
+com\norida\app\bean\ApplicationTestedBean.class
+com\norida\app\model\Metric.class
+com\ecodeup\bean\HolaMundo.class
+com\norida\app\model\Cycle.class
