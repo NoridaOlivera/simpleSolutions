@@ -20,5 +20,22 @@ public class ApplicationController {
 		
 		
 	}
+	
+	public static int validationApp(String name, String version, ArrayList<ApplicationTested> APPS) {
+		
+		Integer i = 1;
+		for (ApplicationTested app : APPS) {
+			if ((app.getName().equals(name))&&(app.getVersion().equals(version))) {
+				i = 0;
+			}
+		}
+		
+		return i;
+		
+	}
+	
+	
+	
+	
 
 }

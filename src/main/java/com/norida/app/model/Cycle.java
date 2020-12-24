@@ -16,10 +16,17 @@ public class Cycle {
 		
 	}
 	
-	public Cycle(Integer id, Integer id_app, String name) {
+	public Cycle(Integer id_app, String name) {
 		super();
 		this.id_app = id_app;
 		this.name = name;
+	}
+	
+	public Cycle(Integer id_app, String name, ArrayList<Metric> metrics) {
+		super();
+		this.id_app = id_app;
+		this.name = name;
+		this.metrics = metrics;
 	}
 
 

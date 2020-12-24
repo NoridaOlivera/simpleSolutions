@@ -10,34 +10,37 @@
 	<title>QA TEST - PROJECT</title>
 </h:head>
 <h:body>
+<div class="container">
 <h1>QA Testing Control</h1>
 
 	<br />
 	<br />
-	
+	<div class="alert alert-dark" role="alert">
+    	<h:messages globalOnly="true"></h:messages>
+	</div>
 
-<div class="container">
+
  <h:form class="form-group">
      
          <div class="form-group">
          <label for="name">Application Name</label>
-         <h:inputText id="name" value="#{ApplicationTested.name}" placeholder="Name" class="form-control"></h:inputText>
+         <h:inputText id="name" value="#{ApplicationTested.name}" class="form-control" required="true"></h:inputText>
 		</div>
          <div class="form-group">
          <label for="version">Version</label>
-         <h:inputText id="version" value="#{ApplicationTested.version}" class="form-control"></h:inputText>
+         <h:inputText id="version" value="#{ApplicationTested.version}" class="form-control" required="true"></h:inputText>
 		 </div>
          
          <h:commandButton action="#{ApplicationBean.AddApp(ApplicationTested.name,ApplicationTested.version)}" value="Add Application" class="btn btn-primary"></h:commandButton>
     
    </h:form>
-</div> 
+
    
 	<br />
 	<br />
 	
 
- <h:dataTable value="#{ApplicationBean.APPS}" var="data" class="table">
+ <h:dataTable value="#{ApplicationBean.APPS}" var="data" class="table table-sm">
       <h:column>
          <f:facet name="header">
             <h:outputText value="Id"></h:outputText>
@@ -76,17 +79,19 @@
       <h:column>
          <h:form>
             <h:commandButton action="#{ApplicationBean.DeleteApp(data.id)}"
-               value="Delete" class="btn btn-danger"></h:commandButton>
-         </h:form>
+               value="Delete" class="btn btn-danger btn-xs" ></h:commandButton>
+          </h:form>
       </h:column>
       <h:column>
-         <h:form>
+        <h:form>
             <h:commandButton action="#{ApplicationBean.redirectCycle(data.id)}"
-               value="Cycles"></h:commandButton>
-         </h:form>
+               value="Cycles" class="btn btn-primary btn-xs"></h:commandButton>
+        </h:form>
       </h:column>
       
    </h:dataTable>
+   
+   </div> 
 
 </h:body>
 </html>

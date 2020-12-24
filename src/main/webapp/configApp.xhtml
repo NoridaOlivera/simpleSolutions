@@ -10,24 +10,24 @@
 	<title>QA TEST - CYCLE config</title>
 </h:head>
 <h:body>
+<div class="container">
 <h1>QA Testing - Cycle create Control</h1>
 
 	<br />
 	<br />
-	<div class="container">
-	<label>App Name</label>
-	<h1>#{ApplicationBean.getNameApp()}</h1>
-	<label>Version</label>
-	<h2>#{ApplicationBean.VERSION_SELECTED}</h2>
+	<div class="shadow p-3 mb-5 bg-white rounded">
+		<h2>App: #{ApplicationBean.getNameApp()} v. #{ApplicationBean.VERSION_SELECTED}</h2>
+	</div>
 	
-	<h2>Add a new cycle</h2>
+	<h4>Add a new cycle</h4>
 	 <h:form class="form-group">
      
          <div class="form-group">
          <label for="name">Cycle name</label>
-         <h:inputText id="name" value="#{CycleBean.name}" placeholder="Name" class="form-control" required="true"></h:inputText>
+         <h:inputText id="name" value="#{CycleBean.name}" class="form-control" required="true"></h:inputText>
          <div class="" role="alert alert-primary">
-  			<h:message for="name" class="alert alert-primary"></h:message></div>
+  			<h:message for="name" class="alert alert-primary"></h:message>
+  		</div>
 		</div>
        <h:commandButton action="#{ApplicationBean.AddNewCycle(CycleBean.name)}" value="Add Cycle" class="btn btn-primary"></h:commandButton>
        <hr />
@@ -35,7 +35,7 @@
    <h:form class="form-group">
    		<h:commandButton action="#{ApplicationBean.returnIndex()}" value="Return" class="btn btn-primary"></h:commandButton>
    </h:form> 
-	</div>
+	
 	 <h:dataTable value="#{ApplicationBean.CYCLES_SELECTED}" var="cycle" class="table">
       <h:column>
          <f:facet name="header">
@@ -78,7 +78,7 @@
       </h:column>
       
    </h:dataTable>
-   
+</div>   
 	
 </h:body>
 </html>

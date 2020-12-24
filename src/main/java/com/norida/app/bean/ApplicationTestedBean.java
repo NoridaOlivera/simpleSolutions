@@ -122,11 +122,7 @@ public class ApplicationTestedBean {
 	
 	public void AddApp(String name, String version) {
 		Integer i = 1;
-		for (ApplicationTested app : APPS) {
-			if ((app.getName().equals(name))&&(app.getVersion().equals(version))) {
-				i = 0;
-			}
-		}
+		i= ApplicationController.validationApp(name, version, APPS);
 		
 		if (i==0) {
 			String msg = "Error 001: Ya existe esta aplicacion en la version ingresada";

@@ -16,13 +16,10 @@
 	<br />
 	<div class="container">
 		<label>App Name</label>
-		<h1>#{ApplicationBean.getNameApp()}</h1>
-		<label>Version</label>
-		<h3>#{ApplicationBean.VERSION_SELECTED}</h3>
-		<label>Cycle</label>
-		<h3>#{ApplicationBean.CYCLE_SELECTED}</h3>
+		<h2>#{ApplicationBean.getNameApp()} v. #{ApplicationBean.VERSION_SELECTED} - Cycle: #{ApplicationBean.CYCLE_SELECTED}</h2>
 		
-		<h2>Add a new metric</h2>
+		
+		<h3>Add a new metric</h3>
 		<h:form class="form-group">
 	     
 	         <div class="form-group">
@@ -48,7 +45,7 @@
 	   <h:form class="form-group">
 	   		<h:commandButton action="#{ApplicationBean.returnCycle()}" value="Return" class="btn btn-primary"></h:commandButton>
 	   </h:form> 
-	</div>
+	
 	<h:dataTable value="#{ApplicationBean.METRICS_SELECTED}" var="metric" class="table">
       <h:column>
          <f:facet name="header">
@@ -81,18 +78,18 @@
       <h:column>
          <h:form>
             <h:commandButton action="#{ApplicationBean.DeleteCycle(cycle.name)}"
-               value="Delete Cycle" class="btn btn-danger"></h:commandButton>
+               value="Delete Cycle" class="btn btn-danger btn-xs"></h:commandButton>
          </h:form>
       </h:column>
       <h:column>
          <h:form>
             <h:commandButton action="#{ApplicationBean.redirectCycle(data.id)}"
-               value="Add Metric"></h:commandButton>
+               value="Add Metric" class="btn btn-primary btn-xs"></h:commandButton>
          </h:form>
       </h:column>
       
    </h:dataTable>
-   
+   </div>
 	
 </h:body>
 </html>
