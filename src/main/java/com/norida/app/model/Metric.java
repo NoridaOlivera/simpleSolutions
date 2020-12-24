@@ -5,36 +5,34 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean(name="MetricBean")
 public class Metric {
 	
-	private Integer id;
-	private Integer id_cycle;
+	private String nameCycle;
 	private Integer id_app;
 	private String name;
 	private Integer result;
 	
+	public Metric() {
+		
+	}
 	
-	
-	public Metric(Integer id, Integer id_cycle, Integer id_app, String name, Integer result) {
+	public Metric(String nameCycle, Integer id_app, String name, Integer result) {
 		super();
-		this.id = id;
-		this.id_cycle = id_cycle;
+		this.nameCycle = nameCycle;
 		this.id_app = id_app;
 		this.name = name;
 		this.result = result;
 	}
 	
 	
-	public Integer getId() {
-		return id;
+	
+	
+	public String getNameCycle() {
+		return nameCycle;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+
+	public void setNameCycle(String nameCycle) {
+		this.nameCycle = nameCycle;
 	}
-	public Integer getId_cycle() {
-		return id_cycle;
-	}
-	public void setId_cycle(Integer id_cycle) {
-		this.id_cycle = id_cycle;
-	}
+
 	public Integer getId_app() {
 		return id_app;
 	}

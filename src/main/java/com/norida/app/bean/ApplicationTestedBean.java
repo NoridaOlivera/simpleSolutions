@@ -19,11 +19,14 @@ public class ApplicationTestedBean {
 	private ArrayList<ApplicationTested> APPS ;
 	private Integer IDSELECTED;
 	private String VERSION_SELECTED;
+	private String CYCLE_SELECTED;
 	private ArrayList<Cycle> CYCLES_SELECTED;
+	private ArrayList<Metric> METRICS_SELECTED;
 
 	@PostConstruct
 	public void init() {
 		CYCLES_SELECTED = new ArrayList<Cycle>();
+		METRICS_SELECTED = new ArrayList<Metric>();
 		APPS = new ArrayList<ApplicationTested>();
 		IDSELECTED = new Integer(0);
 		
@@ -50,18 +53,27 @@ public class ApplicationTestedBean {
 	public void getCycle(){
 		for(ApplicationTested appt : APPS) {
 			if((appt.getId() == IDSELECTED)&&(appt.getCycles()!= null)) {
-				System.out.println("INGRESO IF CYCLES SELECTED ***************");
 				CYCLES_SELECTED = appt.getCycles();
-				System.out.println("INGRESO IF CYCLES SELECTED ***************" + CYCLES_SELECTED.size());
 			}
 				
 		}
 		
 	}
 	
+	public void getMetric() {
+		System.out.println(CYCLES_SELECTED.size());
+		for(Cycle cct : CYCLES_SELECTED) {
+			if(cct.getName().equals(CYCLE_SELECTED)) {
+				METRICS_SELECTED = cct.getMetrics();
+			}
+				
+		}
+	}
+	
 	public void AddNewCycle(String nameCycle) {
 		Cycle newCycle = new Cycle();
 		newCycle.setId_app(IDSELECTED);
+		newCycle.setMetrics(new ArrayList<Metric>());
 		newCycle.setName(nameCycle);
 		CYCLES_SELECTED.add(newCycle);
 		/*for (ApplicationTested appt : APPS) {
@@ -72,6 +84,17 @@ public class ApplicationTestedBean {
 		//APPS.get(1).setCycles(CYCLES_SELECTED);
 	}
 	
+	public void AddNewMetric(String nameMetric, Integer result) {
+		Metric newMetric = new Metric(CYCLE_SELECTED, IDSELECTED, nameMetric, result);
+		METRICS_SELECTED.add(newMetric);
+		for (Cycle cct : CYCLES_SELECTED) {
+			if(cct.getName().equals(CYCLE_SELECTED)) {
+				cct.setMetrics(METRICS_SELECTED);
+			}
+		}
+		CYCLES_SELECTED.get(0).setMetrics(METRICS_SELECTED);
+	}
+	
 	public void DeleteApp(Integer appId) {
 		ApplicationTested DeleteAppt = new ApplicationTested();
 		for (ApplicationTested appt : APPS) {
@@ -80,6 +103,17 @@ public class ApplicationTestedBean {
 			}
 		}
 		APPS.remove(DeleteAppt);
+	}
+	
+	public void DeleteCycle(String nameCycle) {
+		Cycle delCycle = new Cycle();
+		for(Cycle c : CYCLES_SELECTED) {
+			if (c.getName().equals(nameCycle)) {
+				System.out.println("VALIDACION BORRADO CYCLE");
+				delCycle = c;
+			}
+		}
+		CYCLES_SELECTED.remove(delCycle);
 	}
 	
 	public void AddApp(String name, String version) {
@@ -93,10 +127,20 @@ public class ApplicationTestedBean {
 		return "configApp.xhtml";
 	}
 	
+	public String redirectMetric(String nameC) {
+		CYCLE_SELECTED = nameC;
+		getMetric();
+		return "metrics.xhtml";
+	}
+	
 	public String returnIndex() {
 		IDSELECTED = 0;
 		VERSION_SELECTED = "";
 		return "index.xhtml";
+	}
+	
+	public String returnCycle() {
+		return "configApp.xhtml";
 	}
 	
 	public void addVersion(Integer appId,String newVersion) {
@@ -124,6 +168,16 @@ public class ApplicationTestedBean {
 			}
 		}
 		return cycleNum;
+	}
+	
+	public Integer metricNum(String cycleName) {
+		Integer metricNum=-1;
+		for (Cycle cct : CYCLES_SELECTED) {
+			if(cct.getName().equals(cycleName)) {
+				metricNum = cct.getMetrics().size();
+			}
+		}
+		return metricNum;
 	}
 
 	
@@ -157,6 +211,22 @@ public class ApplicationTestedBean {
 
 	public void setVERSION_SELECTED(String vERSION_SELECTED) {
 		VERSION_SELECTED = vERSION_SELECTED;
+	}
+
+	public String getCYCLE_SELECTED() {
+		return CYCLE_SELECTED;
+	}
+
+	public void setCYCLE_SELECTED(String cYCLE_SELECTED) {
+		CYCLE_SELECTED = cYCLE_SELECTED;
+	}
+
+	public ArrayList<Metric> getMETRICS_SELECTED() {
+		return METRICS_SELECTED;
+	}
+
+	public void setMETRICS_SELECTED(ArrayList<Metric> mETRICS_SELECTED) {
+		METRICS_SELECTED = mETRICS_SELECTED;
 	}
 	
 	

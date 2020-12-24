@@ -25,13 +25,16 @@
      
          <div class="form-group">
          <label for="name">Cycle name</label>
-         <h:inputText id="name" value="#{CycleBean.name}" placeholder="Name" class="form-control"></h:inputText>
-		 </div>
+         <h:inputText id="name" value="#{CycleBean.name}" placeholder="Name" class="form-control" required="true"></h:inputText>
+         <div class="" role="alert alert-primary">
+  			<h:message for="name" class="alert alert-primary"></h:message></div>
+		</div>
        <h:commandButton action="#{ApplicationBean.AddNewCycle(CycleBean.name)}" value="Add Cycle" class="btn btn-primary"></h:commandButton>
        <hr />
-       <h:commandButton action="#{ApplicationBean.returnIndex()}" value="Return" class="btn btn-primary"></h:commandButton>
    </h:form>
-   	   
+   <h:form class="form-group">
+   		<h:commandButton action="#{ApplicationBean.returnIndex()}" value="Return" class="btn btn-primary"></h:commandButton>
+   </h:form> 
 	</div>
 	 <h:dataTable value="#{ApplicationBean.CYCLES_SELECTED}" var="cycle" class="table">
       <h:column>
@@ -48,14 +51,21 @@
       </h:column>
       
       <h:column>
+         <f:facet name="header">
+            <h:outputText value="Metrics"></h:outputText>
+         </f:facet>
+         <h:outputText value="#{ApplicationBean.metricNum(cycle.name)}"></h:outputText>
+      </h:column>
+      
+      <h:column>
          <h:form>
-            <h:commandButton action="#{ApplicationBean.DeleteApp(data.id)}"
-               value="Delete" class="btn btn-danger"></h:commandButton>
+            <h:commandButton action="#{ApplicationBean.DeleteCycle(cycle.name)}"
+               value="Delete Cycle" class="btn btn-danger"></h:commandButton>
          </h:form>
       </h:column>
       <h:column>
          <h:form>
-            <h:commandButton action="#{ApplicationBean.redirectCycle(data.id)}"
+            <h:commandButton action="#{ApplicationBean.redirectMetric(cycle.name)}"
                value="Add Metric"></h:commandButton>
          </h:form>
       </h:column>

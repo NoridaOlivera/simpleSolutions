@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"></link>
+
+
+<h:head>
+	<title>QA TEST - METRIC CONFIG</title>
+</h:head>
+<h:body>
+<h1>QA Testing - Cycle create Control</h1>
+
+	<br />
+	<br />
+	<div class="container">
+		<label>App Name</label>
+		<h1>#{ApplicationBean.getNameApp()}</h1>
+		<label>Version</label>
+		<h3>#{ApplicationBean.VERSION_SELECTED}</h3>
+		<label>Cycle</label>
+		<h3>#{ApplicationBean.CYCLE_SELECTED}</h3>
+		
+		<h2>Add a new metric</h2>
+		<h:form class="form-group">
+	     
+	         <div class="form-group">
+		         <label for="name">Cycle name</label>
+		         <h:inputText id="name" value="#{MetricBean.name}" placeholder="Name" class="form-control" required="true"></h:inputText>
+		         <div class="" role="alert alert-primary">
+		  			<h:message for="name" class="alert alert-primary"></h:message>
+		  		</div>
+			</div>
+			<div>
+				<label for="name">Result</label>
+		         <h:inputText id="result" value="#{MetricBean.result}" placeholder="result" class="form-control" required="true"></h:inputText>
+		         <div class="" role="alert alert-primary">
+		  			<h:message for="result" class="alert alert-primary"></h:message>
+		  		 </div>
+			</div>
+	       <h:commandButton action="#{ApplicationBean.AddNewMetric(MetricBean.name,MetricBean.result)}" value="Add Metric" class="btn btn-primary"></h:commandButton>
+	       <hr />
+	   </h:form>
+	   
+	   <h:form class="form-group">
+	   		<h:commandButton action="#{ApplicationBean.returnCycle()}" value="Return" class="btn btn-primary"></h:commandButton>
+	   </h:form> 
+	</div>
+	<h:dataTable value="#{ApplicationBean.METRICS_SELECTED}" var="metric" class="table">
+      <h:column>
+         <f:facet name="header">
+            <h:outputText value="Cycle"></h:outputText>
+         </f:facet>
+         <h:outputText value="#{metric.nameCycle}"></h:outputText>
+      </h:column>
+      <h:column>
+         <f:facet name="header">
+            <h:outputText value="id_app"></h:outputText>
+         </f:facet>
+         <h:outputText value="#{metric.id_app}"></h:outputText>
+      </h:column>
+      
+       <h:column>
+         <f:facet name="header">
+            <h:outputText value="name"></h:outputText>
+         </f:facet>
+         <h:outputText value="#{metric.name}"></h:outputText>
+      </h:column>
+      
+      <h:column>
+         <f:facet name="header">
+            <h:outputText value="result"></h:outputText>
+         </f:facet>
+         <h:outputText value="#{metric.result}"></h:outputText>
+      </h:column>
+      
+            
+      <h:column>
+         <h:form>
+            <h:commandButton action="#{ApplicationBean.DeleteCycle(cycle.name)}"
+               value="Delete Cycle" class="btn btn-danger"></h:commandButton>
+         </h:form>
+      </h:column>
+      <h:column>
+         <h:form>
+            <h:commandButton action="#{ApplicationBean.redirectCycle(data.id)}"
+               value="Add Metric"></h:commandButton>
+         </h:form>
+      </h:column>
+      
+   </h:dataTable>
+   
+	
+</h:body>
+</html>
