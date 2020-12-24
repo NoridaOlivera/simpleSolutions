@@ -58,6 +58,13 @@
       </h:column>
       
       <h:column>
+         <f:facet name="header">
+            <h:outputText value="Avg Metrics %"></h:outputText>
+         </f:facet>
+         <h:outputText value="#{ApplicationBean.averageMetrics(cycle.metrics)} %"></h:outputText>
+      </h:column>
+      
+      <h:column>
          <h:form>
             <h:commandButton action="#{ApplicationBean.DeleteCycle(cycle.name)}"
                value="Delete Cycle" class="btn btn-danger"></h:commandButton>

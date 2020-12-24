@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
+import com.norida.app.Controllers.ApplicationController;
+import com.norida.app.Controllers.MetricController;
 import com.norida.app.model.ApplicationTested;
 import com.norida.app.model.Cycle;
 import com.norida.app.model.Metric;
@@ -22,7 +26,8 @@ public class ApplicationTestedBean {
 	private String CYCLE_SELECTED;
 	private ArrayList<Cycle> CYCLES_SELECTED;
 	private ArrayList<Metric> METRICS_SELECTED;
-
+	
+	
 	@PostConstruct
 	public void init() {
 		CYCLES_SELECTED = new ArrayList<Cycle>();
@@ -92,7 +97,6 @@ public class ApplicationTestedBean {
 				cct.setMetrics(METRICS_SELECTED);
 			}
 		}
-		CYCLES_SELECTED.get(0).setMetrics(METRICS_SELECTED);
 	}
 	
 	public void DeleteApp(Integer appId) {
@@ -117,7 +121,23 @@ public class ApplicationTestedBean {
 	}
 	
 	public void AddApp(String name, String version) {
+		Integer i = 1;
+		for (ApplicationTested app : APPS) {
+			if ((app.getName().equals(name))&&(app.getVersion().equals(version))) {
+				i = 0;
+			}
+		}
+		
+		if (i==0) {
+			String msg = "Error 001: Ya existe esta aplicacion en la version ingresada";
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			String componentId = null;
+			facesContext.addMessage(componentId, facesMessage);
+			
+		}else {
 		APPS.add(new ApplicationTested(maxIdApp(),name, version, new ArrayList<Cycle>()));
+		}
 		
 	}
 	
@@ -179,9 +199,21 @@ public class ApplicationTestedBean {
 		}
 		return metricNum;
 	}
-
 	
-	public void addCycle() {}
+	public double averageMetrics(ArrayList<Metric> AvMetrics) {
+		return MetricController.averageResults(AvMetrics);
+	}
+	
+	public double averageAppResults(Integer idApp) {
+		double AvgApp=0;
+		for (ApplicationTested app : APPS) {
+			if (app.getId()==idApp) {
+				AvgApp = ApplicationController.averageApp(app);
+			}
+		}
+		return AvgApp;
+	}
+
 	
 	
 

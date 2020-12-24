@@ -57,13 +57,20 @@
          </f:facet>
          <h:outputText value="#{data.version}"></h:outputText>
       </h:column>
-      
+     
       
       <h:column>
          <f:facet name="header">
             <h:outputText value="Cycles"></h:outputText>
          </f:facet>
          <h:outputText value="#{ApplicationBean.cycleNum(data.id)}"></h:outputText>
+      </h:column>
+      
+      <h:column>
+         <f:facet name="header">
+            <h:outputText value="Avg App %"></h:outputText>
+         </f:facet>
+         <h:outputText value="#{ApplicationBean.averageAppResults(data.id)}"></h:outputText>
       </h:column>
       
       <h:column>

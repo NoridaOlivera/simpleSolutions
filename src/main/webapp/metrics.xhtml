@@ -26,7 +26,7 @@
 		<h:form class="form-group">
 	     
 	         <div class="form-group">
-		         <label for="name">Cycle name</label>
+		         <label for="name">Metric name</label>
 		         <h:inputText id="name" value="#{MetricBean.name}" placeholder="Name" class="form-control" required="true"></h:inputText>
 		         <div class="" role="alert alert-primary">
 		  			<h:message for="name" class="alert alert-primary"></h:message>
@@ -34,7 +34,9 @@
 			</div>
 			<div>
 				<label for="name">Result</label>
-		         <h:inputText id="result" value="#{MetricBean.result}" placeholder="result" class="form-control" required="true"></h:inputText>
+		         <h:inputText id="result" value="#{MetricBean.result}" placeholder="result" class="form-control" required="true">
+		         	<f:validateLongRange minimum="0" maximum="100"/>
+		         </h:inputText>
 		         <div class="" role="alert alert-primary">
 		  			<h:message for="result" class="alert alert-primary"></h:message>
 		  		 </div>
@@ -72,7 +74,7 @@
          <f:facet name="header">
             <h:outputText value="result"></h:outputText>
          </f:facet>
-         <h:outputText value="#{metric.result}"></h:outputText>
+         <h:outputText value="#{metric.result} %"></h:outputText>
       </h:column>
       
             
