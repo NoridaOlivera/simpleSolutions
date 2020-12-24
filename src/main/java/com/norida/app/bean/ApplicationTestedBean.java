@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.norida.app.Controllers.ApplicationController;
+import com.norida.app.Controllers.CycleController;
 import com.norida.app.Controllers.MetricController;
 import com.norida.app.model.ApplicationTested;
 import com.norida.app.model.Cycle;
@@ -76,6 +77,18 @@ public class ApplicationTestedBean {
 	}
 	
 	public void AddNewCycle(String nameCycle) {
+		Integer i = CycleController.validateCycleName(CYCLES_SELECTED, nameCycle);
+		if (i==0) {
+			String msg = "Error 002: Ya existe el ciclo en esta aplicacion";
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			String componentId = null;
+			facesContext.addMessage(componentId, facesMessage);
+			
+		}else {
+		
+		
+		
 		Cycle newCycle = new Cycle();
 		newCycle.setId_app(IDSELECTED);
 		newCycle.setMetrics(new ArrayList<Metric>());
@@ -87,14 +100,27 @@ public class ApplicationTestedBean {
 			}
 		}*/
 		//APPS.get(1).setCycles(CYCLES_SELECTED);
+		}
 	}
 	
 	public void AddNewMetric(String nameMetric, Integer result) {
-		Metric newMetric = new Metric(CYCLE_SELECTED, IDSELECTED, nameMetric, result);
-		METRICS_SELECTED.add(newMetric);
-		for (Cycle cct : CYCLES_SELECTED) {
-			if(cct.getName().equals(CYCLE_SELECTED)) {
-				cct.setMetrics(METRICS_SELECTED);
+		
+		Integer i = MetricController.validateMetricName(METRICS_SELECTED, nameMetric);
+		if (i==0) {
+			String msg = "Error 003: Ya existe la metrica en este ciclo";
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			String componentId = null;
+			facesContext.addMessage(componentId, facesMessage);
+			
+		}else {
+		
+			Metric newMetric = new Metric(CYCLE_SELECTED, IDSELECTED, nameMetric, result);
+			METRICS_SELECTED.add(newMetric);
+			for (Cycle cct : CYCLES_SELECTED) {
+				if(cct.getName().equals(CYCLE_SELECTED)) {
+					cct.setMetrics(METRICS_SELECTED);
+				}
 			}
 		}
 	}
@@ -197,7 +223,7 @@ public class ApplicationTestedBean {
 	}
 	
 	public double averageMetrics(ArrayList<Metric> AvMetrics) {
-		return MetricController.averageResults(AvMetrics);
+		return (double)Math.round(MetricController.averageResults(AvMetrics));
 	}
 	
 	public double averageAppResults(Integer idApp) {
@@ -207,7 +233,7 @@ public class ApplicationTestedBean {
 				AvgApp = ApplicationController.averageApp(app);
 			}
 		}
-		return AvgApp;
+		return (double)Math.round(AvgApp);
 	}
 
 	

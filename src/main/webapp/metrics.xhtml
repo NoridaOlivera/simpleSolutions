@@ -10,7 +10,11 @@
 	<title>QA TEST - METRIC CONFIG</title>
 </h:head>
 <h:body>
-<h1>QA Testing - Cycle create Control</h1>
+<h1>QA Testing - Metric Control</h1>
+
+	<div class="alert alert-dark" role="alert">
+    	<h:messages globalOnly="true"></h:messages>
+	</div>
 
 	<br />
 	<br />
@@ -74,19 +78,7 @@
          <h:outputText value="#{metric.result} %"></h:outputText>
       </h:column>
       
-            
-      <h:column>
-         <h:form>
-            <h:commandButton action="#{ApplicationBean.DeleteCycle(cycle.name)}"
-               value="Delete Cycle" class="btn btn-danger btn-xs"></h:commandButton>
-         </h:form>
-      </h:column>
-      <h:column>
-         <h:form>
-            <h:commandButton action="#{ApplicationBean.redirectCycle(data.id)}"
-               value="Add Metric" class="btn btn-primary btn-xs"></h:commandButton>
-         </h:form>
-      </h:column>
+  
       
    </h:dataTable>
    </div>
